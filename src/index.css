@@ -1,0 +1,203 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Nexora-inspired palette, tuned for Sandia Computers */
+  --color-brand-lime: #c9f64b;
+  --color-brand-lime-dark: #b3e52f;
+  --color-brand-lime-soft: #f1ffd2;
+  --color-brand-violet: #7c4dff;
+  --color-brand-violet-light: #a78bfa;
+  --color-brand-lav: #f2eeff;
+  --color-brand-lav-deep: #e5dcff;
+  --color-brand-ink: #141026;
+  --color-brand-ink-soft: #1e1938;
+
+  /* Legacy brand tokens remapped so every page inherits the new look.
+     Sandia's red/blue heritage lives on as accent notes. */
+  --color-brand-blue: #6d47f5;
+  --color-brand-blue-dark: #5530d6;
+  --color-brand-blue-light: #efe9ff;
+  --color-brand-red: #e2456b;
+  --color-brand-red-dark: #c42f55;
+  --color-brand-red-light: #fdeef3;
+  --color-brand-navy: #141026;
+
+  --shadow-soft: 0 1px 2px rgba(20, 16, 38, 0.04), 0 8px 24px -12px rgba(20, 16, 38, 0.16);
+  --shadow-lift: 0 2px 4px rgba(20, 16, 38, 0.05), 0 24px 48px -20px rgba(60, 30, 140, 0.35);
+  --shadow-lime: 0 10px 30px -10px rgba(160, 215, 40, 0.6);
+  --shadow-violet: 0 20px 50px -20px rgba(124, 77, 255, 0.55);
+
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade-in: fade-in 0.5s ease-out both;
+  --animate-slide-in-right: slide-in-right 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-scale-in: scale-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-slide-up: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 44s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 10s ease-in-out infinite reverse;
+  --animate-breathe: breathe 9s ease-in-out infinite;
+  --animate-spin-slow: spin 22s linear infinite;
+  --animate-shimmer: shimmer 3.2s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.6s ease-out infinite;
+  --animate-line-up: line-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-gradient-pan: gradient-pan 12s ease infinite;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slide-in-right {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+  @keyframes slide-up {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.94) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  @keyframes line-up {
+    from { opacity: 0; transform: translateY(105%) rotate(2deg); }
+    to { opacity: 1; transform: translateY(0) rotate(0); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes marquee-reverse {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(0.6deg); }
+  }
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 0.85; }
+    50% { transform: scale(1.08); opacity: 1; }
+  }
+  @keyframes shimmer {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+  }
+  @keyframes pulse-ring {
+    0% { transform: scale(0.8); opacity: 0.6; }
+    100% { transform: scale(1.9); opacity: 0; }
+  }
+  @keyframes gradient-pan {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    overflow-x: clip;
+  }
+  body {
+    @apply bg-white text-slate-600 antialiased;
+    overflow-x: clip;
+    font-feature-settings: "cv11", "ss01", "ss03";
+  }
+  h1, h2, h3, h4 {
+    @apply text-brand-ink tracking-tight;
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  img { @apply max-w-full h-auto; }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-violet rounded-sm;
+  }
+  ::selection { @apply bg-brand-lime text-brand-ink; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@utility scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+@utility reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  &.is-visible { opacity: 1; transform: none; }
+}
+
+@utility grid-pattern {
+  background-image:
+    linear-gradient(to right, rgba(124, 77, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(124, 77, 255, 0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+@utility dot-pattern {
+  background-image: radial-gradient(rgba(167, 139, 250, 0.35) 1.3px, transparent 1.3px);
+  background-size: 18px 18px;
+}
+
+@utility safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Soft edge fade so photographic collages melt into lavender surfaces */
+@utility mask-edges {
+  -webkit-mask-image: radial-gradient(ellipse 72% 68% at 50% 50%, #000 58%, transparent 100%);
+  mask-image: radial-gradient(ellipse 72% 68% at 50% 50%, #000 58%, transparent 100%);
+}
+
+@utility text-gradient {
+  background: linear-gradient(100deg, #7c4dff 0%, #a78bfa 35%, #6d47f5 70%, #7c4dff 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-pan 12s ease infinite;
+}
+
+@utility shimmer-surface {
+  background-image: linear-gradient(100deg, transparent 35%, rgba(255, 255, 255, 0.14) 50%, transparent 65%);
+  background-size: 200% 100%;
+  animation: shimmer 3.2s linear infinite;
+}
+
+@utility card-tilt {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
+  &:hover { transform: translateY(-6px); box-shadow: var(--shadow-lift); }
+}
+
+@utility glow-lime {
+  box-shadow: 0 0 0 1px rgba(201, 246, 75, 0.35), 0 10px 34px -12px rgba(170, 220, 50, 0.75);
+}
+
+@utility glass-dark {
+  background: rgba(30, 25, 56, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
